@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автоблог</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
+<style>
+    h1 {
+       text-align: center;
+    }
+</style>
+
 <body>
     <div class="main">
         <header>
-            <h1 align="center">Мій сайт</h1>
+            <h1>Porsche 930</h1>
         </header>
-        <div align="center">
+        <div class="photo">
             <img src="image/930.jpg">
             <h2>Porsche 930</h2>
             <p>
                 <strong>Porsche 930 </strong>— варіант спортивного автомобіля з турбонаддувом моделі 911, що випускався німецьким автовиробником Porsche між 1975 і 1989 роками. Це була топова модель 911 виробника протягом усього періоду виробництва, і на момент її появи вона була найшвидшим серійним автомобілем, доступним у Німеччині.
             </p>
         </div>
-        <div>
-            <h2 align="center">Моделі Porsche 930 для європеського ринку</h2>
-            <table align="center">
+        <div class="table-container">
+            <h2>Моделі Porsche 930 для європеського ринку</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Модель</th>
@@ -29,26 +37,26 @@
                 <tbody>
                     <tr>
                         <td>1975 930 (260 к.с)</td>
-                        <td align="center">5.2 с</td>
+                        <td>5.2 с</td>
                     </tr>
                     <tr>
                         <td>1978 930 (300 к.с)</td>
-                        <td align="center">5.0 с</td>
+                        <td>5.0 с</td>
                     </tr>
                     <tr>
                         <td>1983 930 (330 к.с)</td>
-                        <td align="center">4.7 с</td>
+                        <td>4.7 с</td>
                     </tr>
                     <tr>
                         <td>1984 930 (330 к.с)</td>
-                        <td align="center">4.6 с</td>
+                        <td>4.6 с</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div  align="center">
+        <div  class="link">
             <a href="https://auto.ria.com/uk/search/?indexName=auto,order_auto,newauto_search&categories.main.id=1&brand.id[0]=59&model.id[0]=539&country.import.usa.not=-1&price.currency=1&sort[0].order=year.asc&abroad.not=0&custom.not=1&page=0&size=20">Автобазар</a>
-            </div>
+        </div>
         <div>
             <h3>Списки</h3>
             <ol>
@@ -68,7 +76,7 @@
                 <dd>Значення 2</dd>
             </dl>            
         </div>
-        <div align="center">
+        <div class="reg">
             <h3>Реєстрація</h3>
             <form>
                 <label for="text_field">Ім'я та прізвище:</label>

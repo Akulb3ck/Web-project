@@ -1,0 +1,178 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0; 
+    }
+    to {
+        opacity: 1; 
+    }
+}
+
+.main, .photo, .table-container, .reg {
+    animation: fadeIn 1s ease-in-out; 
+}
+
+body {
+    background: linear-gradient(to bottom, #00c3ff, #fffb00);
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+.main {
+    width: 80%; 
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px; 
+    padding: 20px; 
+    background-color: #f0f0f0d8; 
+    border: 2px solid #cccccc7a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+}
+
+.photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.photo img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+  
+.photo h2 {
+    margin-top: 1em;
+}
+  
+.photo p {
+    text-indent: 1.5em;
+    margin: 0em 1em 2em 0em;
+    font-size: 20px;
+}
+
+.table-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+    text-align: center;
+    padding: 10px; 
+    border: 1px solid #ddd; 
+}
+
+.table-container h2 {
+    text-align: center;
+}
+
+.link {
+    color: blue;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+div {
+    margin-top: 20px;
+}
+
+h3 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+ol, ul, dl {
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+dd {
+    margin-bottom: 10px;
+}
+
+.reg {
+    text-align: center;
+    margin-top: 3em;
+}
+
+.reg div {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.reg h3 {
+    text-align: center;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.reg form {
+    margin-bottom: 15px;
+}
+
+.reg label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.reg input[type="text"],
+.reg input[type="password"],
+.reg textarea {
+    width: 60%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.reg select {
+    width: 20%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.reg input[type="button"] {
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.reg input[type="button"]:hover {
+    background-color: #0056b3; 
+}
