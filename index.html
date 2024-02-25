@@ -16,16 +16,26 @@
 <body>
     <div class="main">
         <header>
+            <nav id="menu">
+                <ul>
+                    <li><a href="#first">Опис автомобіля</a></li>
+                    <li><a href="#second">Моделі</a></li>
+                    <li><a href="https://auto.ria.com/uk/search/?indexName=auto,order_auto,newauto_search&categories.main.id=1&brand.id[0]=59&model.id[0]=539&country.import.usa.not=-1&price.currency=1&sort[0].order=year.asc&abroad.not=0&custom.not=1&page=0&size=20">Автобазар</a></li>
+                    <li><a href="#registration">Реєстрація</a></li>
+                </ul>
+                <button id="menu-toggle">&#9776;</button>
+            </nav>
             <h1>Porsche 930</h1>
         </header>
-        <div class="photo">
+        <div class="photo" id="first">
             <img src="image/930.jpg">
             <h2>Porsche 930</h2>
             <p>
-                <strong>Porsche 930 </strong>— варіант спортивного автомобіля з турбонаддувом моделі 911, що випускався німецьким автовиробником Porsche між 1975 і 1989 роками. Це була топова модель 911 виробника протягом усього періоду виробництва, і на момент її появи вона була найшвидшим серійним автомобілем, доступним у Німеччині.
+                <strong>Porsche 930 </strong>— варіант спортивного автомобіля з турбонаддувом моделі 911, що випускався німецьким автовиробником Porsche між 1975 і 1989 роками. 
+                Це була топова модель 911 виробника протягом усього періоду виробництва, і на момент її появи вона була найшвидшим серійним автомобілем, доступним у Німеччині.
             </p>
         </div>
-        <div class="table-container">
+        <div class="table-container" id="second">
             <h2>Моделі Porsche 930 для європеського ринку</h2>
             <table>
                 <thead>
@@ -54,10 +64,7 @@
                 </tbody>
             </table>
         </div>
-        <div  class="link">
-            <a href="https://auto.ria.com/uk/search/?indexName=auto,order_auto,newauto_search&categories.main.id=1&brand.id[0]=59&model.id[0]=539&country.import.usa.not=-1&price.currency=1&sort[0].order=year.asc&abroad.not=0&custom.not=1&page=0&size=20">Автобазар</a>
-        </div>
-        <div>
+        <div class="list">
             <h3>Списки</h3>
             <ol>
                 <li>Елемент 1</li>
@@ -76,7 +83,7 @@
                 <dd>Значення 2</dd>
             </dl>            
         </div>
-        <div class="reg">
+        <div class="reg" id="registration">
             <h3>Реєстрація</h3>
             <form>
                 <label for="text_field">Ім'я та прізвище:</label>
@@ -107,7 +114,7 @@
             </form>
             
             <form>
-                <label for="dropdown">Улюбелі типи авто:</label>
+                <label for="dropdown">Улюбелені типи авто:</label>
                 <select id="dropdown" name="dropdown">
                     <option value="option1">Амереканські</option>
                     <option value="option2">Європейські</option>
@@ -121,5 +128,6 @@
         </div>
         <p align="center">Porsche&copy; 2024</p>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>

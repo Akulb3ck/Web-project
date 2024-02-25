@@ -1,9 +1,18 @@
 @keyframes fadeIn {
     from {
-        opacity: 0; 
+        opacity: 0;
     }
     to {
-        opacity: 1; 
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
 
@@ -18,8 +27,15 @@ body {
     font-family: Arial, sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .main {
+    display: flex;
+    flex-direction: column;
     width: 80%; 
     margin: 0 auto;
     margin-top: 30px;
@@ -41,7 +57,7 @@ body {
 }
 
 .photo img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     margin: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -58,6 +74,9 @@ body {
 }
 
 .table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -94,30 +113,40 @@ div {
     margin-top: 20px;
 }
 
-h3 {
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.list h3 {
     color: #333;
     font-size: 1.2em;
     margin-bottom: 10px;
+    text-align: center;
 }
 
-ol, ul, dl {
+.list ol, .list ul, .list dl {
     margin-bottom: 20px;
 }
 
-li {
+.list li {
     margin-bottom: 5px;
 }
 
-dt {
+.list dt {
     font-weight: bold;
     margin-bottom: 3px;
 }
 
-dd {
+.list dd {
     margin-bottom: 10px;
 }
 
 .reg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     margin-top: 3em;
 }
@@ -130,7 +159,6 @@ dd {
 }
 
 .reg h3 {
-    text-align: center;
     color: #333;
     font-size: 1.2em;
     margin-bottom: 10px;
@@ -164,7 +192,6 @@ dd {
 }
 
 .reg input[type="button"] {
-    align-items: center;
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
@@ -173,6 +200,133 @@ dd {
     cursor: pointer;
 }
 
+.reg select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+
 .reg input[type="button"]:hover {
     background-color: #0056b3; 
+}
+
+
+@media only screen and (max-width: 768px) {
+    .main {
+        width: 90%; 
+    }
+
+    .photo {
+        max-width: 90%; 
+    }
+
+    .table-container {
+        max-width: 90%; 
+    }
+
+    .reg input[type="text"],
+    .reg input[type="password"],
+    .reg textarea,
+    .reg select {
+        width: 90%; 
+    }
+}
+
+#menu ul {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f0f0f0d8; 
+    border: 2px solid #cccccc7a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+#menu li {
+    display: inline-block;
+}
+
+#menu li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    background-color: #d7e4f9;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+header {
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
+        #menu ul {
+            display: none;
+            position: absolute;
+            width: 100%;
+            background-color: #f0f0f0d8;
+            border: 2px solid #cccccc7a;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            top: 65%;
+            left: 87.5%;
+            z-index: 999;
+            padding: 0;
+        }
+    
+        #menu ul.active {
+            display: block; 
+            opacity: 1;
+            visibility: visible;
+            height: 180px;
+            width: 100px;
+            animation: fadeIn 0.5s ease forwards;
+            font-size: 12px;
+            overflow-y: auto; 
+        }
+    
+        #menu ul li {
+            float: none;
+            text-align: center;
+        }
+        
+        #menu ul li a {
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+        }
+
+        #menu-toggle {
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 13px;
+            font-size: 20px;
+            background-color: #f0f0f0d8; 
+            border: 2px solid #cccccc7a;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            border: none;
+            cursor: pointer;
+        }
+    
+        #menu-toggle:hover {
+            background-color: #d7e4f9;
+        }
+    
+        #menu-toggle.active {
+            background-color: #9ec0f525;
+        }
+    }
 }
