@@ -2,21 +2,12 @@
     from {
         opacity: 0;
     }
-    to {
+    to {    
         opacity: 1;
     }
 }
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-.main, .photo, .table-container, .reg {
+.main, .photo, .table-container, .reg, #menu, #menu-toggle {
     animation: fadeIn 1s ease-in-out; 
 }
 
@@ -241,9 +232,9 @@ div {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #f0f0f0d8; 
-    border: 2px solid #cccccc7a;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+   border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #menu li {
@@ -330,3 +321,92 @@ header {
         }
     }
 }
+
+.survey {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+   
+}
+
+.survey h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: -15px;
+}
+
+.survey form {
+    display: grid;
+    gap: 10px;
+}
+
+.survey label {
+    font-weight: bold;
+}
+
+.survey input[type="text"],
+.survey input[type="email"],
+.survey textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cccccc58;
+    border-radius: 4px;
+}
+
+.survey select,
+.survey input[type="datetime-local"],
+.survey input[type="date"],
+.survey input[type="number"],
+.survey input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cccccc58;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.survey input[type="color"] {
+    width: 25%;
+    height: 40px;
+    padding: 5px;
+    margin: 0 auto;
+    border: 1px solid #cccccc58;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.survey input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.survey input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.survey input[type="radio"],
+.survey input[type="checkbox"] {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+.survey p {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+form input[type="checkbox"] + label,
+form input[type="radio"] + label {
+    display: block;
+    font-weight: bold;
+    margin-top: -28px; 
+}
+
+
