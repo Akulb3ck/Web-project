@@ -428,6 +428,16 @@ form input[type="radio"] + label {
     margin-bottom: 10px;
 }
 
+.question p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.question ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
 #result-container {
     text-align: center;
 }
