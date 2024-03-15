@@ -143,6 +143,8 @@ document.getElementById('filter').addEventListener('change', function(event) {
   var datetimeInput = document.getElementById('datetime');
 
   if (filter === 'averageScore') {
+    param1Label.style.display = 'block';
+    param1Input.style.display = 'block';
     param2Label.style.display = 'block';
     param2Input.style.display = 'block';
     datetimeLabel.style.display = 'none';
@@ -154,7 +156,9 @@ document.getElementById('filter').addEventListener('change', function(event) {
     param2Input.style.display = 'none';
     param1Label.style.display = 'none';
     param1Input.style.display = 'none';
-  } else {
+  } else if(filter === 'faculty') {
+    param1Label.style.display = 'block';
+    param1Input.style.display = 'block';
     param2Label.style.display = 'none';
     param2Input.style.display = 'none';
     datetimeLabel.style.display = 'none';
@@ -162,7 +166,144 @@ document.getElementById('filter').addEventListener('change', function(event) {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  const testData = {
+    testName: "Тест по Porsche 930",
+    question: [
+        {
+            question: "Вкажіть потужність двигуна Porsche 930 1975 року:",
+            answers: [
+                {
+                    answers: "253 к.с",
+                    isCorrect: false,
+                },
+                {
+                    answers: "276 к.с",
+                    isCorrect: false,
+                },
+                {
+                    answers: "260 к.с",
+                    isCorrect: true,
+                },
+                {
+                    answers: "245 к.с",
+                    isCorrect: false,
+                },
+            ]
+        },
+        {
+            question: "Вкажіть час розгону Porsche 930 1975 року до 100км/год:",
+            answers: [
+                {
+                    answers: "5.0 с",
+                    isCorrect: false,
+                },
+                {
+                    answers: "5.2 с",
+                    isCorrect: true,
+                },
+                {
+                    answers: "5.4 с",
+                    isCorrect: false,
+                },
+                {
+                    answers: "4.9 с",
+                    isCorrect: false,
+                },
+            ]
+        },
+        {
+            question: "Вкажіть період випуску Porsche 930:",
+            answers: [
+                {
+                    answers: "1971-1983 рр.",
+                    isCorrect: false,
+                },
+                {
+                    answers: "1976-1989 рр.",
+                    isCorrect: false,
+                },
+                {
+                    answers: "1979-1986 рр.",
+                    isCorrect: false,
+                },
+                {
+                    answers: "1975-1989 рр.",
+                    isCorrect: true,
+                },
+            ]
+        },
+        {
+            question: "Вкажіть тип двигуна Porsche 930:",
+            answers: [
+                {
+                    answers: "Бензиновий двигун",
+                    isCorrect: true,
+                },
+                {
+                    answers: "Дизельний двигун",
+                    isCorrect: false,
+                },
+                {
+                    answers: "Електричний двигун",
+                    isCorrect: false,
+                },
+                {
+                    answers: "Гібридний двигун",
+                    isCorrect: false,
+                },
+            ]
+        },
+        {
+            question: "Вкажіть країну автовиробника Porsche:",
+            answers: [
+                {
+                    answers: "Німеччина",
+                    isCorrect: true,
+                },
+                {
+                    answers: "Франція",
+                    isCorrect: false,
+                },
+                {
+                    answers: "Японія",
+                    isCorrect: false,
+                },
+                {
+                    answers: "США",
+                    isCorrect: false,
+                },
+            ]
+        }
+    ]
+  }
 
+    const questionsContainer = document.getElementById('questions-container');
+    const submitButton = document.getElementById('submit-btn');
+    const resultContainer = document.getElementById('result-container');
 
-  
-  
+    testData.question.forEach((question, index) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('question');
+        questionElement.innerHTML = `
+            <p>${index + 1}. ${question.question}</p>
+            <ul>
+                ${question.answers.map(answer => `<li><label><input type="radio" name="question${index}" value="${answer.isCorrect}">${answer.answers}</label></li>`).join('')}
+            </ul>
+        `;
+        questionsContainer.appendChild(questionElement);
+    });
+
+    function checkResults() {
+        const answerInputs = document.querySelectorAll('input[type="radio"]');
+        let score = 0;
+        answerInputs.forEach(input => {
+            if (input.checked && input.value === "true") {
+                score++;
+            }
+        });
+        resultContainer.innerHTML = `<p>Ви відповіли правильно на ${score} з ${testData.question.length} питань.</p>`;
+    }
+
+    submitButton.addEventListener('click', checkResults);
+});

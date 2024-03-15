@@ -182,15 +182,6 @@ div {
     border-radius: 3px;
 }
 
-.reg input[type="button"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
 .reg select {
     width: 100%;
     padding: 8px;
@@ -199,15 +190,13 @@ div {
     border-radius: 3px;
 }
 
-
 .reg input[type="button"]:hover {
     background-color: #0056b3; 
 }
 
-
 @media only screen and (max-width: 768px) {
     .main {
-        width: 90%; 
+        width: 75%; 
     }
 
     .photo {
@@ -271,7 +260,7 @@ header {
             border: 2px solid #cccccc7a;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             top: 65%;
-            left: 87.5%;
+            left: 82%;
             z-index: 999;
             padding: 0;
         }
@@ -303,7 +292,7 @@ header {
             display: block;
             position: absolute;
             top: 20px;
-            right: 13px;
+            left: 89%;
             font-size: 20px;
             background-color: #f0f0f0d8; 
             border: 2px solid #cccccc7a;
@@ -376,7 +365,9 @@ header {
     background-color: white;
 }
 
-.survey input[type="submit"] {
+.survey input[type="submit"],
+.test input[type="submit"],
+.reg input[type="button"] {
     padding: 10px 20px;
     background-color: #4caf50;
     color: white;
@@ -384,9 +375,12 @@ header {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-align: center;
 }
 
-.survey input[type="submit"]:hover {
+.survey input[type="submit"]:hover,
+.test input[type="submit"]:hover,
+.reg input[type="button"]:hover {
     background-color: #45a049;
 }
 
@@ -409,4 +403,31 @@ form input[type="radio"] + label {
     margin-top: -28px; 
 }
 
+#test-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.test h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: -15px;
+}
+
+#questions-container {
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 10px;
+}
+
+#result-container {
+    text-align: center;
+}
