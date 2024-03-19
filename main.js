@@ -1,3 +1,6 @@
+var scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+// Menu
 const menuToggle = document.getElementById('menu-toggle');
 const menuUl = document.querySelector('#menu ul');
 
@@ -6,6 +9,7 @@ menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
 });
 
+// Slow Scroll
 document.querySelectorAll('#menu a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         if (this.getAttribute('href').startsWith('#')) {
@@ -26,6 +30,7 @@ document.querySelectorAll('#menu a').forEach(anchor => {
     })
 })
 
+// Зберігання результату опитування 
 document.getElementById('survey').addEventListener('submit', function(event) {
   event.preventDefault();
   var formData = new FormData(event.target);
@@ -38,6 +43,7 @@ document.getElementById('survey').addEventListener('submit', function(event) {
   localStorage.setItem('surveyResults_' + surveyId, JSON.stringify(surveyResult));
 });
 
+// Запити-фільтри
 function filterByFaculty(faculty) {
   var results = [];
   for (var i = 0; i < localStorage.length; i++) {
@@ -166,6 +172,7 @@ document.getElementById('filter').addEventListener('change', function(event) {
   }
 });
 
+// тест
 document.addEventListener("DOMContentLoaded", function() {
   const testData = {
     testName: "Тест по Porsche 930",
@@ -307,3 +314,328 @@ document.addEventListener("DOMContentLoaded", function() {
 
     submitButton.addEventListener('click', checkResults);
 });
+
+
+// Змійка
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+var gridSize = 25;
+var tileCount = canvas.width / gridSize;
+
+var headTexture = new Image();
+var bodyTexture = new Image();
+var tailTexture = new Image();
+var bendRTexture = new Image();
+var bendLTexture = new Image();
+var eggTexture = new Image();
+var backgroundTexture = new Image();
+var MenuStartTexture = new Image();
+var MenuPauseTexture = new Image();
+var MenuEndTexture = new Image();
+var ScoreTexture = new Image();
+
+headTexture.src = 'image/Head.png';
+bodyTexture.src = 'image/Body.png';
+tailTexture.src = 'image/Tail.png';
+bendRTexture.src = 'image/bendR.png';
+bendLTexture.src = 'image/bendL.png';
+eggTexture.src = 'image/Egg.png';
+backgroundTexture.src = 'image/Background.png';
+MenuStartTexture.src = 'image/MenuStart.png';
+MenuPauseTexture.src = 'image/MenuPause.png';
+MenuEndTexture.src = 'image/MenuEnd.png';
+ScoreTexture.src = 'image/Score.png';
+
+var player = {
+  x: gridSize * Math.floor(tileCount / 2),
+  y: gridSize * Math.floor(tileCount / 2),
+  dx: gridSize,
+  dy: 0,
+  cells: [],
+  maxCells: 4
+};
+
+var egg = {
+  x: gridSize * Math.floor(Math.random() * tileCount),
+  y: gridSize * Math.floor(Math.random() * tileCount)
+};
+
+var scores = [];
+var count = 0;
+var score = 0;
+var totalScore = 0;
+var bestScore = 0;
+var worstScore = 0;
+var gamePlaying = false;
+var gameOver = false;
+var gamePaused = false;
+
+function drawMenu() {
+  context.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var x = canvas.width / 4; 
+  var y = canvas.height / 4; 
+  context.drawImage(MenuStartTexture, x, y, canvas.width / 2, canvas.height / 2);
+}
+
+function drawEndScreen() {
+  context.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var x = canvas.width / 4; 
+  var y = canvas.height / 4; 
+  context.drawImage(MenuEndTexture, x, y, canvas.width / 2, canvas.height / 2);
+  drawNumber(totalScore, canvas.width - 220, canvas.height - 130);
+}
+
+function drawPauseScreen() {
+  context.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var x = canvas.width / 4; 
+  var y = canvas.height / 4; 
+  context.drawImage(MenuPauseTexture, x, y, canvas.width / 2, canvas.height / 2);
+}
+
+var digitTextures = [];
+for (var i = 0; i <= 9; i++) {
+  digitTextures[i] = new Image();
+  digitTextures[i].src = 'image/Number/digit' + i + '.png';
+}
+
+function drawNumber(number, x, y) {
+  var digits = number.toString().split('');
+  for (var i = 0; i < digits.length; i++) {
+    var digit = parseInt(digits[i]);
+    if (digitTextures[digit].complete) {
+      context.drawImage(digitTextures[digit], x + i * gridSize, y, gridSize, gridSize);
+    }
+  }
+}
+
+function updateScore() {
+  context.drawImage(ScoreTexture, canvas.width - 190, 0, gridSize * 4, gridSize);
+  drawNumber(score, canvas.width - 90, 0);
+}
+
+function updateScoreList() {
+  var storedScores = localStorage.getItem('totalScore');
+  if (storedScores) {
+    scores = JSON.parse(storedScores);
+  } else {
+    scores = [];
+  }
+  scores.sort(function(a, b){return b-a});
+
+  var bestScores = scores.slice(0, 3);
+  var worstScores = scores.slice(-3).reverse();
+
+  var bestScoresList = document.getElementById('bestScores');
+  bestScoresList.innerHTML = '';
+  for (var i = 0; i < bestScores.length; i++) {
+    var li = document.createElement('li');
+    li.textContent = bestScores[i];
+    bestScoresList.appendChild(li);
+  }
+
+  var worstScoresList = document.getElementById('worstScores');
+  worstScoresList.innerHTML = '';
+  for (var i = 0; i < worstScores.length; i++) {
+    var li = document.createElement('li');
+    li.textContent = worstScores[i];
+    worstScoresList.appendChild(li);
+  }
+}
+
+window.onload = function() {
+  updateScoreList();
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  
+  if (++count < 16) {
+    return;
+  }
+
+  count = 0;
+  context.clearRect(0,0,canvas.width,canvas.height);
+
+  if (!gamePlaying) {
+    if (gameOver) {
+      drawEndScreen();
+    } else {
+      drawMenu();
+    }
+    return;
+  }
+
+  player.cells.forEach(function(cell, index) {
+    var texture;
+    var vx = player.dx / gridSize;
+    var vy = player.dy / gridSize;
+    if (!gamePlaying) return;
+
+    if (index === 0) {
+      texture = headTexture;
+    } else if (index === player.cells.length - 1) {
+      texture = tailTexture;
+    } else {
+      texture = bodyTexture;
+    }
+ 
+    context.save();
+ 
+    context.translate(cell.x + gridSize / 2, cell.y + gridSize / 2);
+
+    if (index === 0) {
+      texture = headTexture;
+    } else if (index === player.cells.length - 1) {
+      texture = tailTexture;
+    } else { 
+      // Перевіряємо, чи є згин у поточній клітинці
+      if (player.cells[index + 1]) {
+        var dx = cell.x - player.cells[index - 1].x;
+        var dy = cell.y - player.cells[index - 1].y;
+        var nextDx = player.cells[index + 1].x - cell.x;
+        var nextDy = player.cells[index + 1].y - cell.y;
+        if (dx !== nextDx || dy !== nextDy) {
+          var turnDirection = (dx * nextDy - dy * nextDx) > 0 ? 'right' : 'left';
+          texture = turnDirection === 'right' ? bendRTexture : bendLTexture;
+        }
+      } else {
+        texture = bodyTexture;
+      }
+    }
+
+    var angle;
+    if (index === 0) { // Для голови змії
+      if (vx === 1) angle = Math.PI * 3 / 2; // вправо
+      else if (vx === -1) angle = Math.PI / 2; // вліво
+      else if (vy === -1) angle = Math.PI; // вгору
+      else if (vy === 1) angle = 0; // вниз
+    } else { // Для тіла та хвоста змії
+      var dx = cell.x - player.cells[index - 1].x;
+      var dy = cell.y - player.cells[index - 1].y;
+      angle = Math.atan2(dy, dx) + Math.PI / 2;
+    }
+    context.rotate(angle);
+    context.drawImage(texture, -gridSize / 2, -gridSize / 2, gridSize, gridSize);
+    context.restore();
+
+    if (cell.x === egg.x && cell.y === egg.y) {
+      player.maxCells++;
+      score++;
+      egg.x = gridSize * Math.floor(Math.random() * tileCount);
+      egg.y = gridSize * Math.floor(Math.random() * tileCount);
+    }
+
+    for (var i = index + 1; i < player.cells.length; i++) {
+      if (cell.x === player.cells[i].x && cell.y === player.cells[i].y) {
+        totalScore = score;
+        player.x = gridSize * Math.floor(tileCount / 2);
+        player.y = gridSize * Math.floor(tileCount / 2);
+        player.cells = [];
+        player.maxCells = 4;
+        player.dx = gridSize;
+        player.dy = 0;
+
+        egg.x = gridSize * Math.floor(Math.random() * tileCount);
+        egg.y = gridSize * Math.floor(Math.random() * tileCount);
+
+        gamePlaying = false;
+        gameOver = true;
+        if (!gamePlaying && gameOver) {
+          scores.push(score);
+          scores.sort(function(a, b){return b-a});
+          localStorage.setItem('totalScore', JSON.stringify(scores));
+      
+          var bestScores = scores.slice(0, 3);
+          var worstScores = scores.slice(-3).reverse();
+      
+          var bestScoresList = document.getElementById('bestScores');
+          bestScoresList.innerHTML = '';
+          for (var i = 0; i < bestScores.length; i++) {
+            var li = document.createElement('li');
+            li.textContent = bestScores[i];
+            bestScoresList.appendChild(li);
+          }
+      
+          var worstScoresList = document.getElementById('worstScores');
+          worstScoresList.innerHTML = '';
+          for (var i = 0; i < worstScores.length; i++) {
+            var li = document.createElement('li');
+            li.textContent = worstScores[i];
+            worstScoresList.appendChild(li);
+          }
+        }
+        score = 0;
+      }
+    }
+  });
+  
+  if (gamePaused) {
+    drawPauseScreen();
+    return;
+  }
+
+  player.x += player.dx;
+  player.y += player.dy;
+
+  if (player.x < 0) {
+    player.x = canvas.width - gridSize;
+  }
+  else if (player.x >= canvas.width) {
+    player.x = 0;
+  }
+  if (player.y < 0) {
+    player.y = canvas.height - gridSize;
+  }
+  else if (player.y >= canvas.height) {
+    player.y = 0;
+  }
+  player.cells.unshift({x: player.x, y: player.y});
+  if (player.cells.length > player.maxCells) {
+    player.cells.pop();
+  }
+
+  context.drawImage(eggTexture, egg.x, egg.y, gridSize, gridSize);
+
+  updateScore();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.which === 37 && player.dx === 0) {
+    player.dx = -gridSize;
+    player.dy = 0;
+  }
+  else if (e.which === 38 && player.dy === 0) {
+    player.dy = -gridSize;
+    player.dx = 0;
+  }
+  else if (e.which === 39 && player.dx === 0) {
+    player.dx = gridSize;
+    player.dy = 0;
+  }
+  else if (e.which === 40 && player.dy === 0) {
+    player.dy = gridSize;
+    player.dx = 0;
+  }
+  else if (e.which === 13) {
+    gamePlaying = true;
+    gameOver = false;
+    gamePaused = false;
+  }
+  else if (e.which === 80) { 
+    if (gamePlaying) {
+      gamePaused = !gamePaused;
+    }
+  }
+});
+
+window.addEventListener("keydown", function(e) {
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
+requestAnimationFrame(loop);
